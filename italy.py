@@ -65,7 +65,7 @@ fig.update_layout(
         title="Share %",
         thicknessmode="pixels", thickness=15,
         lenmode="fraction", len=0.45, # Lunghezza che copre quasi tutta l'Italia
-        yanchor="middle", y=0.5,      # Centrata verticalmente
+        yanchor="middle", y=0.55,      # Centrata verticalmente
         xanchor="left", x=0.85,       # Avvicinata allo stivale
         ticks="outside"
     )
