@@ -2,8 +2,13 @@ import streamlit as st
 import plotly.express as px
 import pandas as pd
 
-# 2025 Regional Data (Estimates based on Terna and GSE year-end reports)
-# Share of renewables in gross final energy consumption (%)
+# Configurazione pagina per Streamlit
+st.set_page_config(page_title="Italy 2025 Energy Map", layout="centered")
+
+st.title("🇮🇹 Italy 2025: Regional Clean Energy Footprint")
+st.markdown("Interactive visualization of renewable energy share in gross final consumption. *Hover over regions for details.*")
+
+# 1. Dataset (I tuoi dati verificati 2025)
 data = {
     'Region': [
         'Abruzzo', 'Basilicata', 'Calabria', 'Campania', 'Emilia-Romagna',
@@ -21,10 +26,10 @@ data = {
 
 df = pd.DataFrame(data)
 
-# Official GeoJSON URL for Italian regional boundaries (ISTAT/OpenPolis)
+# 2. GeoJSON per i confini regionali
 geojson_url = "https://raw.githubusercontent.com/openpolis/geojson-italy/master/geojson/limits_IT_regions.geojson"
 
-# Creating the English Regional Choropleth Map
+# 3. Creazione Mappa Interattiva
 fig = px.choropleth(df,
                     geojson=geojson_url,
                     locations='Region',
@@ -32,27 +37,25 @@ fig = px.choropleth(df,
                     color='Renewables_2025',
                     color_continuous_scale='Blues',
                     range_color=[10, 100],
-                    labels={'Renewables_2025':'Renewables Share (%)'})
+                    hover_name='Region', # Mostra il nome in grassetto nell'hover
+                    hover_data={'Region': False, 'Renewables_2025': ':.1f'}, # Formattazione pulita
+                    labels={'Renewables_2025': 'Renewables Share (%)'})
 
-# Geographical optimization for Italy
 fig.update_geos(fitbounds="locations", visible=False)
 
 fig.update_layout(
-    title=dict(
-        text="<b>Italy 2025: Regional Clean Energy Footprint</b><br>Share of renewable energy in gross final consumption by Region",
-        x=0.48 # Regola il titolo per allinearlo visivamente allo stivale
-    ),
-    margin=dict(l=0, r=0, t=80, b=0),
-    font=dict(size=14, color='black'),
+    margin=dict(l=0, r=0, t=20, b=0),
+    height=600,
     coloraxis_colorbar=dict(
-        title="Share %", # Ripristinato il titolo predefinito
-        x=0.7, # Sposta la colorbar più a sinistra per avvicinarla al grafico
-        y=0.55,
-        yanchor='middle',
-        len=0.9 # Rende la colorbar più corta
+        title="Share %",
+        x=0.8,
+        y=0.5,
+        len=0.75
     )
 )
 
-# Rimossa l'annotazione separata per il titolo della colorbar
+# Visualizzazione su Streamlit
+st.plotly_chart(fig, use_container_width=True)
 
-fig.show()
+st.divider()
+st.caption("Source: Estimates based on Terna and GSE 2025 reports. Built with Plotly & Streamlit.")
