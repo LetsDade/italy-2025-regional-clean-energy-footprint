@@ -18,7 +18,7 @@ st.markdown("""
     <div class="main-title">
         🇮🇹 Italy 2025: Regional Clean Energy Footprint<br>
         <span style="font-size: 18px; font-weight: normal; color: #555;">
-            Renewable energy share in gross final consumption by Region
+            Share of renewable energy in gross final consumption by Region
         </span>
     </div>
     """, unsafe_allow_html=True)
@@ -64,7 +64,7 @@ fig.update_layout(
     coloraxis_colorbar=dict(
         title="Share %",
         thicknessmode="pixels", thickness=15,
-        lenmode="fraction", len=0.85, # Lunghezza che copre quasi tutta l'Italia
+        lenmode="fraction", len=0.50, # Lunghezza che copre quasi tutta l'Italia
         yanchor="middle", y=0.5,      # Centrata verticalmente
         xanchor="left", x=0.85,       # Avvicinata allo stivale
         ticks="outside"
