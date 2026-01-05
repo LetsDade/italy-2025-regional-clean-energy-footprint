@@ -64,8 +64,8 @@ fig.update_layout(
     coloraxis_colorbar=dict(
         title="Share %",
         thicknessmode="pixels", thickness=15,
-        lenmode="fraction", len=0.50, # Lunghezza che copre quasi tutta l'Italia
-        yanchor="middle", y=0.5,      # Centrata verticalmente
+        lenmode="fraction", len=0.45, # Lunghezza che copre quasi tutta l'Italia
+        yanchor="middle", y=0.4,      # Centrata verticalmente
         xanchor="left", x=0.85,       # Avvicinata allo stivale
         ticks="outside"
     )
